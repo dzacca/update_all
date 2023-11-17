@@ -16,12 +16,12 @@ apt or any other apt-syntax-compatible tool (I use nala).
 
 The default uses nala:
 
-```
+```shell
 export APT=`which nala`
 ```
 
 to use apt change it to:
-```
+```shell
 export APT=`which apt`
 ```
 
