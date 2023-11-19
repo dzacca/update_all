@@ -22,6 +22,8 @@ then
 fi
 
 # execute
+#
+echo "############################################################"
 echo "Updating base system..."
 sudo ${APT} upgrade -y
 sudo ${APT} dist-upgrade -y
@@ -32,6 +34,7 @@ sudo ${APT} autoremove --purge -y
 if [[ ${FLATPAK} =~ "flatpak" ]];
 then
   echo
+  echo "############################################################"
   echo "Updating flatpak..."
 
   sudo ${FLATPAK} update -y
@@ -41,29 +44,47 @@ fi
 
 # TeX Live update
 #
-echo 
-echo "Updating TeX Live..."
 
 if [[ ${TEX} =~ "tlmgr" ]]; then
+  echo 
+  echo "############################################################"
+  echo "Updating TeX Live..."
+
   sudo tlmgr update --repository ctan --self --all
 fi
 
 # Conda
 #
-echo
-echo "Updating Conda..."
 
 if [[ ${CONDA} =~ "conda" ]];
+  echo
+  echo "############################################################"
+  echo "Updating Conda..."
+
 then
   ${CONDA} update --update-all -y
 fi
 
 # Rust
 #
-echo
-echo "Updating Rust..."
-
 if [[ ${RUST} =~ "rustup" ]];
+  echo
+  echo "############################################################"
+  echo "Updating Rust..."
+
 then
   ${RUST} update
+fi
+
+# rtl8821ce driver
+#
+export RTLDIR="/home/`whoami`/dev/rtl8821ce"
+if [[ -d ${RTLDIR} ]];
+then
+  echo
+  echo "############################################################"
+  echo "Pulling latest rtl8821ce driver..."
+  cd ${RTLDIR}
+  git pull -q
+  cd -
 fi
