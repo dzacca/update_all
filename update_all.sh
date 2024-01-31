@@ -8,12 +8,14 @@ TEX=$(which tlmgr) >>/dev/null 2>&1
 FLATPAK=$(which flatpak) >>/dev/null 2>&1
 CONDA=$(which conda) >>/dev/null 2>&1
 RUST=$(which rustup) >>/dev/null 2>&1
+SNAP=$(which snap) >>/dev/null 2>&1
 
 export APT
 export TEX
 export FLATPAK
 export CONDA
 export RUST
+export SNAP
 
 if [[ ${APT} =~ "nala" ]]; then
   export NALA="true"
@@ -32,6 +34,15 @@ echo "Updating base system..."
 sudo "${APT}" upgrade -y
 sudo "${APT}" dist-upgrade -y
 sudo "${APT}" autoremove --purge -y
+
+# Snaps update
+#
+if [[ ${SNAP} =~ "snap" ]]; then
+  echo
+  echo "############################################################"
+  echo "Updating snaps..."
+  sudo snap refresh
+fi
 
 # Flatpak update
 #
