@@ -9,6 +9,7 @@ FLATPAK=$(which flatpak) >>/dev/null 2>&1
 CONDA=$(which conda) >>/dev/null 2>&1
 RUST=$(which rustup) >>/dev/null 2>&1
 SNAP=$(which snap) >>/dev/null 2>&1
+P10K="Y"
 
 export APT
 export TEX
@@ -101,4 +102,11 @@ if [[ -d ${RTLDIR} ]]; then
   cd ${RTLDIR}
   git pull -q
   cd -
+fi
+
+if [[ ${P10K} == "Y" ]]; then
+  echo
+  echo "############################################################"
+  echo "Pulling latest version of powerlevel10k prompt..."
+  git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull
 fi
