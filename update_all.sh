@@ -10,6 +10,7 @@ CONDA=$(which conda) >>/dev/null 2>&1
 RUST=$(which rustup) >>/dev/null 2>&1
 SNAP=$(which snap) >>/dev/null 2>&1
 ZOOM=$(which zoom) >>/dev/null 2>&1
+DEBGET=$(which deb-get) >>/dev/null 2>&1
 P10K="Y"
 
 export APT
@@ -42,11 +43,8 @@ sudo "${APT}" autoremove --purge -y
 if [[ ${ZOOM} =~ "zoom" ]]; then
   echo
   echo "############################################################"
-  echo "Updating zoom..."
-  cd ~/Downloads
-  rm zoom_amd64.deb
-  wget https://zoom.us/client/latest/zoom_amd64.deb
-  sudo nala install -y ./zoom_amd64.deb
+  echo "Updating cwdeb-get package..."
+  ${DEBGET} upgrade
 fi
 
 # Snaps update
