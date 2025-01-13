@@ -32,6 +32,26 @@ fi
 
 # execute
 #
+# rtl8821ce driver
+#
+RTLDIR="/home/$(whoami)/dev/rtl8821ce"
+export RTLDIR
+if [[ -d ${RTLDIR} ]]; then
+  echo
+  echo "############################################################"
+  echo "Pulling latest rtl8821ce driver..."
+  cd ${RTLDIR}
+  git pull -q
+  cd -
+fi
+
+if [[ ${P10K} == "Y" ]]; then
+  echo
+  echo "############################################################"
+  echo "Pulling latest version of powerlevel10k prompt..."
+  git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull
+fi
+
 echo "############################################################"
 echo "Updating base system..."
 sudo "${APT}" upgrade -y
@@ -102,22 +122,3 @@ then
   ${RUST} update
 fi
 
-# rtl8821ce driver
-#
-RTLDIR="/home/$(whoami)/dev/rtl8821ce"
-export RTLDIR
-if [[ -d ${RTLDIR} ]]; then
-  echo
-  echo "############################################################"
-  echo "Pulling latest rtl8821ce driver..."
-  cd ${RTLDIR}
-  git pull -q
-  cd -
-fi
-
-if [[ ${P10K} == "Y" ]]; then
-  echo
-  echo "############################################################"
-  echo "Pulling latest version of powerlevel10k prompt..."
-  git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull
-fi
