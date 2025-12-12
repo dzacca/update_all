@@ -42,9 +42,24 @@ if [[ -d ${RTLDIR} ]]; then
   echo "Pulling latest rtl8821ce driver..."
   cd ${RTLDIR}
   git pull -q
+  make clean
   cd -
 fi
 
+#
+# TP-Link AC600 Archer T2 Nana driver
+#
+RTLDIR2="/home/$(whoami)/dev/rtw88"
+export RTLDIR2
+if [[ -d ${RTLDIR} ]]; then
+  echo
+  echo "############################################################"
+  echo "Pulling latest rtw88 driver..."
+  cd ${RTLDIR2}
+  git pull -q
+  make clean
+  cd -
+fi
 if [[ ${P10K} == "Y" ]]; then
   echo
   echo "############################################################"
